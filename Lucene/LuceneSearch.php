@@ -5,9 +5,11 @@ namespace EWZ\Bundle\SearchBundle\Lucene;
 use EWZ\Bundle\SearchBundle\Lucene\Lucene;
 use Zend\Search\Lucene\Analysis\Analyzer\Analyzer;
 use Zend\Search\Lucene\Index\Term;
+use Zend\Search\Lucene\Search\QueryHit;
 
 class LuceneSearch
 {
+    /** @var \Zend\Search\Lucene\Index  */
     protected $index;
 
     /**
@@ -16,7 +18,7 @@ class LuceneSearch
      * @param string   $luceneIndexPath
      * @param Analyzer $analyzer
      */
-    public function __construct($luceneIndexPath, $analyzer)
+    public function __construct($luceneIndexPath, $analyzer = null)
     {
         if (file_exists($luceneIndexPath)) {
             $this->index = Lucene::open($luceneIndexPath);
@@ -29,6 +31,9 @@ class LuceneSearch
         }
     }
 
+    /**
+     * @return \Zend\Search\Lucene\Index
+     */
     public function getIndex() {
         return $this->index;
     }
@@ -38,9 +43,9 @@ class LuceneSearch
      *
      *  This is a convience function to add a document to the index
      *
-     * @param EWZ\Bundle\SearchBundle\Lucene\Document $document
+     * @param Document $document
      */
-    public function addDocument($document)
+    public function addDocument(Document $document)
     {
         $this->deleteDocument($document);
         $this->index->addDocument($document);
@@ -57,20 +62,24 @@ class LuceneSearch
         $this->index->optimize();
     }
 
+    /**
+     * @param $query
+     * @return QueryHit[]
+     */
     public function find($query)
     {
         return call_user_func_array(array($this->index, 'find'), func_get_args());
     }
 
-    public function updateDocument($document)
+    public function updateDocument(Document $document)
     {
         $this->addDocument($document);
     }
 
-    public function deleteDocument($document)
+    public function deleteDocument(Document $document)
     {
         // Search for documents with the same Key value.
-        $term = new Term($document->key, 'key');
+        $term = new Term($document->getField('key'), 'key');
         $docIds = $this->index->termDocs($term);
 
         // Delete any documents found.
