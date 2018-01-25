@@ -2,22 +2,31 @@
 
 namespace EWZ\Bundle\SearchBundle\Tests\DependencyInjection;
 
+
+use EWZ\Bundle\SearchBundle\DependencyInjection\EWZSearchExtension;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
-use EWZ\Bundle\SearchBundle\DependencyInjection\EWZSearchExtension;
-
-class SearchExtensionTest extends \PHPUnit_Framework_TestCase
+class SearchExtensionTest extends WebTestCase
 {
     /**
      * @covers EWZ\Bundle\SearchBundle\DependencyInjection\EWZSearchExtension::load
      */
     public function testConfigLoad()
     {
-        $container = $this->getContainer();
+        /** @var ContainerBuilder $container */
+        $container = new ContainerBuilder(new ParameterBag());
         $loader = new EWZSearchExtension();
 
         $loader->load(array(), $container);
-        $this->assertEquals('Bundle\\SearchBundle\\Lucene\\LuceneSearch', $container->getParameter('ewz_search.lucene.search.class'), '->luceneLoad() loads the lucene.xml file if not already loaded');
+        $searchClass = $container->getParameter('ewz_search.lucene.search.class');
+        $this->assertEquals('EWZ\\Bundle\\SearchBundle\\Lucene\\LuceneSearch', $searchClass, '->luceneLoad() loads the lucene.xml file if not already loaded');
+
+        $analyzer = $container->getParameter("lucene.analyzer");
+        $this->assertEquals('Zend\Search\Lucene\Analysis\Analyzer\Common\TextNum\CaseInsensitive', $analyzer, '->luceneLoad() loads the lucene.xml file if not already loaded');
+
+        $indexPath = $container->getParameter("lucene.index.path");
+        $this->assertEquals('%kernel.root_dir%/cache/%kernel.environment%/lucene/index', $indexPath, '->luceneLoad() loads the lucene.xml file if not already loaded');
     }
 }
