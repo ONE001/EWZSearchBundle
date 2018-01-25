@@ -6,7 +6,6 @@ EWZSearchBundle
 This bundle provides advance search capability for Symfony.
 
 ## Installation
-
 Installation depends on how your project is setup:
 
 ### Installation using composer
@@ -43,11 +42,11 @@ $bundles = array(
 );
 ```
 
-
-### alternative Installation methods
+### Alternative Installation methods
 
 #### Install with the vendors.php or using submodules
-##### The `bin/vendors.php` method
+
+**The `bin/vendors.php` method**
 
 If you're using the `bin/vendors.php` method to manage your vendor libraries,
 add the following entries to the `deps` in the root of your project file:
@@ -73,7 +72,7 @@ $ ./bin/vendors
 
 Great! Now skip down to *Configure the autoloader*.
 
-##### Submodules
+**Submodules**
 
 If you're managing your vendor libraries with submodules, first create the
 `vendor/bundles/EWZ/Bundle` directory:
@@ -131,6 +130,7 @@ analyzer to Zend\Search\Lucene\Analysis\Analyzer\Common\TextNum\CaseInsensitive
 See http://framework.zend.com/manual/en/zend.search.lucene.extending.html for more information
 
 For backward compatability reasons the old and new config both work.
+
 ### using one or more SearchIndex => new config
 
 ``` yaml
@@ -150,6 +150,7 @@ ewz_search:
 ```
 
 ### using only one SearchIndex => old config
+
 ``` yaml
 # app/config/config.yml
 ewz_search:
@@ -160,6 +161,7 @@ ewz_search:
 Congratulations! You're ready!
 
 ## Basic Usage
+
 ### Getting the index
 Depending on you configuration you can get access to the LuceneSearch object for your index in one of the following ways:
 

@@ -10,7 +10,9 @@ class Document extends ZendDocument
      * Returns type for a named field in this document.
      *
      * @param string $fieldName
+     *
      * @return string
+     *
      * @throws \Exception
      */
     public function getFieldType($fieldName)
