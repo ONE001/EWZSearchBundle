@@ -1,6 +1,8 @@
 EWZSearchBundle
 =============
 
+[![Build Status](https://api.travis-ci.org/excelwebzone/EWZSearchBundle.svg)](https://travis-ci.org/excelwebzone/EWZSearchBundle)
+
 This bundle provides advance search capability for Symfony.
 
 ## Installation
