@@ -5,6 +5,7 @@ namespace EWZ\Bundle\SearchBundle\Tests\Lucene;
 use EWZ\Bundle\SearchBundle\Lucene\LuceneSearch;
 use EWZ\Bundle\SearchBundle\Lucene\Document;
 use EWZ\Bundle\SearchBundle\Lucene\Field;
+use Zend\Search\Lucene\Index;
 
 class LuceneSearchTest extends \PHPUnit_Framework_TestCase
 {
@@ -76,6 +77,15 @@ class LuceneSearchTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFieldType()
     {}
+
+    public function tearDown()
+    {
+        parent::tearDown();
+        $reflectionClass = new \ReflectionClass(Index::class);
+        $reflectionProperty = $reflectionClass->getProperty('_hasChanges');
+        $reflectionProperty->setAccessible(true);
+        $reflectionProperty->setValue($this->search->getIndex(), false);
+    }
 
     protected function recursiveDelete($str)
     {

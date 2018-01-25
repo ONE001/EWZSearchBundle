@@ -6,7 +6,7 @@ namespace EWZ\Bundle\SearchBundle\Tests\DependencyInjection;
 use EWZ\Bundle\SearchBundle\DependencyInjection\EWZSearchExtension;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
 class SearchExtensionTest extends WebTestCase
 {
@@ -16,7 +16,7 @@ class SearchExtensionTest extends WebTestCase
     public function testConfigLoad()
     {
         /** @var ContainerBuilder $container */
-        $container = new ContainerBuilder(new EnvPlaceholderParameterBag());
+        $container = new ContainerBuilder(new ParameterBag());
         $loader = new EWZSearchExtension();
 
         $loader->load(array(), $container);
