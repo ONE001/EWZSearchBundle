@@ -25,7 +25,7 @@
   },
   "autoload": {
     "psr-4": {
-      "EWZ\\Bundle\\SearchBundle\\": ""
+      "EWZ\\Bundle\\SearchBundle\\": "src"
     }
   },
   "autoload-dev": {
