@@ -39,9 +39,7 @@ class LuceneSearch
     }
 
     /**
-     *  addDocument
-     *
-     *  This is a convience function to add a document to the index
+     * This is a convience function to add a document to the index
      *
      * @param Document $document
      */
@@ -52,8 +50,6 @@ class LuceneSearch
     }
 
     /**
-     * updateIndex
-     *
      * A convience function to commit and optimize the index
      */
     public function updateIndex()
@@ -64,6 +60,7 @@ class LuceneSearch
 
     /**
      * @param $query
+     *
      * @return QueryHit[]
      */
     public function find($query)
@@ -71,11 +68,17 @@ class LuceneSearch
         return call_user_func_array(array($this->index, 'find'), func_get_args());
     }
 
+    /**
+     * @param Document $document
+     */
     public function updateDocument(Document $document)
     {
         $this->addDocument($document);
     }
 
+    /**
+     * @param Document $document
+     */
     public function deleteDocument(Document $document)
     {
         // Search for documents with the same Key value.

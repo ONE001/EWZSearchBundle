@@ -1,6 +1,6 @@
 <?php
 
-namespace EWZ\Bundle\SearchBundle\Tests\DependencyInjection;
+namespace EWZ\Tests\Bundle\SearchBundle\DependencyInjection;
 
 
 use EWZ\Bundle\SearchBundle\DependencyInjection\EWZSearchExtension;

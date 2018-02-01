@@ -1,6 +1,6 @@
 <?php
 
-namespace EWZ\Bundle\SearchBundle\Tests\Lucene;
+namespace EWZ\Tests\Bundle\SearchBundle\Lucene;
 
 use EWZ\Bundle\SearchBundle\Lucene\Document;
 use EWZ\Bundle\SearchBundle\Lucene\Field;
