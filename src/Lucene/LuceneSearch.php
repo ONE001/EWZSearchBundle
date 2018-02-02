@@ -82,7 +82,7 @@ class LuceneSearch
     public function deleteDocument(Document $document)
     {
         // Search for documents with the same Key value.
-        $term = new Term($document->getField('key'), 'key');
+        $term = new Term($document->getField('key')->value, 'key');
         $docIds = $this->index->termDocs($term);
 
         // Delete any documents found.
