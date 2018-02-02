@@ -2,10 +2,10 @@
 
 namespace EWZ\Bundle\SearchBundle\Lucene;
 
-use EWZ\Bundle\SearchBundle\Lucene\Lucene;
 use Zend\Search\Lucene\Analysis\Analyzer\Analyzer;
 use Zend\Search\Lucene\Index\Term;
 use Zend\Search\Lucene\Search\QueryHit;
+use Zend\Search\Lucene\Document as ZendDocument;
 
 class LuceneSearch
 {
@@ -41,9 +41,9 @@ class LuceneSearch
     /**
      * This is a convience function to add a document to the index
      *
-     * @param Document $document
+     * @param ZendDocument $document
      */
-    public function addDocument(Document $document)
+    public function addDocument( $document)
     {
         $this->deleteDocument($document);
         $this->index->addDocument($document);
@@ -69,17 +69,17 @@ class LuceneSearch
     }
 
     /**
-     * @param Document $document
+     * @param ZendDocument $document
      */
-    public function updateDocument(Document $document)
+    public function updateDocument(ZendDocument $document)
     {
         $this->addDocument($document);
     }
 
     /**
-     * @param Document $document
+     * @param ZendDocument $document
      */
-    public function deleteDocument(Document $document)
+    public function deleteDocument(ZendDocument $document)
     {
         // Search for documents with the same Key value.
         $term = new Term($document->getField('key')->value, 'key');

@@ -9,29 +9,12 @@ This bundle provides advance search capability for Symfony.
 Installation depends on how your project is setup:
 
 ### Installation using composer
-To install EWZSearchBundle with Composer just add the following to your `composer.json` file:
-
+Execute require command.
+``` bash
+$ composer require excelwebzone/search-bundle "^1.0"
 ```
-// composer.json
-{
-    // ...
-    require: {
-        // ...
-        "excelwebzone/zend-search": "dev-master",
-        "excelwebzone/search-bundle": "dev-master",
-    }
-}
-```
-Then, you can install the new dependencies by running Composer’s update command from 
-the directory where your `composer.json` file is located:
-
-```
-php composer.phar update
-```
-Now, Composer will automatically download all required files, and install them for you. 
-All that is left to do is to update your AppKernel.php file, and register the new bundle:
-
-```
+Enable the bundle in `AppKernel.php`.
+``` php
 <?php
 
 // in AppKernel::registerBundles()
@@ -40,86 +23,6 @@ $bundles = array(
    	new EWZ\Bundle\SearchBundle\EWZSearchBundle(),
     // ...
 );
-```
-
-### Alternative Installation methods
-
-#### Install with the vendors.php or using submodules
-
-**The `bin/vendors.php` method**
-
-If you're using the `bin/vendors.php` method to manage your vendor libraries,
-add the following entries to the `deps` in the root of your project file:
-
-```
-[EWZSearchBundle]
-    git=http://github.com/excelwebzone/EWZSearchBundle.git
-    target=/bundles/EWZ/Bundle/SearchBundle
-
-; Dependency:
-;------------
-[Search]
-    git=http://github.com/excelwebzone/zend-search.git
-    target=/zend-search
-
-```
-
-Next, update your vendors by running:
-
-``` bash
-$ ./bin/vendors
-```
-
-Great! Now skip down to *Configure the autoloader*.
-
-**Submodules**
-
-If you're managing your vendor libraries with submodules, first create the
-`vendor/bundles/EWZ/Bundle` directory:
-
-``` bash
-$ mkdir -pv vendor/bundles/EWZ/Bundle
-```
-
-Next, add the necessary submodules:
-
-``` bash
-$ git submodule add git://github.com/excelwebzone/zend-search.git vendor/zend-search/Zend/Search
-$ git submodule add git://github.com/excelwebzone/EWZSearchBundle.git vendor/bundles/EWZ/Bundle/SearchBundle
-```
-
-#### Configure the autoloader
-
-Add the following entry to your autoloader:
-
-``` php
-<?php
-// app/autoload.php
-
-$loader->registerNamespaces(array(
-    // ...
-
-    'Zend\\Search' => __DIR__.'/../vendor/zend-search/',
-    'EWZ'          => __DIR__.'/../vendor/bundles',
-));
-```
-
-#### Enable the bundle
-
-Finally, enable the bundle in the kernel:
-
-``` php
-<?php
-// app/AppKernel.php
-
-public function registerBundles()
-{
-    $bundles = array(
-        // ...
-
-        new EWZ\Bundle\SearchBundle\EWZSearchBundle(),
-    );
-}
 ```
 
 ## Configuration
